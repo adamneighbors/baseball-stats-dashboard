@@ -78,7 +78,7 @@ def return_pitching_chart(pitching_stats):
     if not chart_data:
         return None
 
-    # Create figure for BA chart
+    # Create figure for pitching chart
     fig = px.line(
         data_frame=chart_data,
         x='Game Day',

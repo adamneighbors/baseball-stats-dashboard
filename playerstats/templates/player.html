@@ -18,7 +18,6 @@
                         <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li>
                         <li class="list-group-item d-flex p-0 border-0">Batting Arm: {{ player.bats }}</li>
                         <li class="list-group-item d-flex p-0 border-0">Throwing Arm: {{ player.throws }}</li>
-                        <!-- <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li> -->
                     </ul>
                 </div>
             </div>
@@ -34,7 +33,6 @@
                     <tr>
                         <th>Pitches</th>
                         <th>Stikes</th>
-                        {% comment %} <th>Strike Outs</th> {% endcomment %}
                         <th>Ground Outs</th>
                         <th>Fly Outs</th>
                         <th>Batters Faced</th>
@@ -44,7 +42,6 @@
                     <tr>
                         <td>{{ player_stats.total_pitches }}</td>
                         <td>{{ player_stats.total_strikes }}</td>
-                        {% comment %} <td>{{ player_stats.total_strikeouts }}</td> {% endcomment %}
                         <td>{{ player_stats.total_ground_outs }}</td>
                         <td>{{ player_stats.total_fly_outs }}</td>
                         <td>{{ player_stats.total_batters_faced }}</td>
