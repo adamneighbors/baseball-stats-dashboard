@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-md-2">
+            <h2 class="mt-4 mb-4">{{ player.name }} ({{ player.position }}) - #{{ player.jersey_number }}</h2>
+            <div class="media">
+                {% if player.headshot %}
+                    <div class="col-md-5">
+                            <img class="align-self-start mr-3" src={{ player.headshot }}>
+                    </div>
+                {% endif %}
+                <div class="col-md-5">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex p-0 border-0">Born: {{ player.dob }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Height: {{ player.height }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Batting Arm: {{ player.bats }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Throwing Arm: {{ player.throws }}</li>
+                        <!-- <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-9 offset-md-2">
+            {% if player.position.lower == "p" %}
+                <h3> {{ year }} Pitching Statistics</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Pitches</th>
+                        <th>Stikes</th>
+                        {% comment %} <th>Strike Outs</th> {% endcomment %}
+                        <th>Ground Outs</th>
+                        <th>Fly Outs</th>
+                        <th>Batters Faced</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ player_stats.total_pitches }}</td>
+                        <td>{{ player_stats.total_strikes }}</td>
+                        {% comment %} <td>{{ player_stats.total_strikeouts }}</td> {% endcomment %}
+                        <td>{{ player_stats.total_ground_outs }}</td>
+                        <td>{{ player_stats.total_fly_outs }}</td>
+                        <td>{{ player_stats.total_batters_faced }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                {{ pitch_chart|safe }}
+            {% else %}
+                <h3> {{ year }} Batting Statistics</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>At Bats</th>
+                            <th>Hits</th>
+                            <th>Doubles</th>
+                            <th>Triples</th>
+                            <th>Home Runs</th>
+                            <th>Batting Average</th>
+                            <th>Runs</th>
+                            <th>RBI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ player_stats.total_at_bats }}</td>
+                            <td>{{ player_stats.total_hits }}</td>
+                            <td>{{ player_stats.total_doubles }}</td>
+                            <td>{{ player_stats.total_triples }}</td>
+                            <td>{{ player_stats.total_home_runs }}</td>
+                            <td>{{ player_stats.total_batting_average|remove_leading_zero }}</td>
+                            <td>{{ player_stats.total_runs }}</td>
+                            <td>{{ player_stats.total_rbi }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{ ba_chart|safe }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

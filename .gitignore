@@ -1,0 +1,6 @@
+.venv/
+config.ini
+playerstats/data/
+playerstats/migrations
+.vscode/
+*__pycache__*

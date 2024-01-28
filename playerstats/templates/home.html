@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script>
+        $(document).ready(function () {
+            $("#searchInput").on("input", function () {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: "{% url 'playerstats:search_players' %}",
+                    type: "GET",
+                    data: { q: query },
+                    success: function (data) {
+                        $("#searchResults").empty().html(data);
+                        // Check if query is empty
+                        if (query.trim() === "") {
+                            // If query is empty, show the player loop container
+                            $(".player-loop-container").show();
+                        } else {
+                            // If query is not empty, hid the player loop container
+                            $(".player-loop-container").hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <input type="text" id="searchInput" class="form-control" placeholder="Search players...">
+    <div id="searchResults"></div>
+    <div class="player-loop-container">
+        <div class="row x-2">
+            {% for player in players %}
+                <div class="col-md-3">
+                    <div class="card fixed-spacing fixed-width-card" style="width: 200px;">
+                        <a href="{% url 'playerstats:player_by_year' player.id 2023 %}">
+                            {% if player.headshot  %}
+                                <img class="card-img-top" src="{{ player.headshot }}">
+                            {% endif %}
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ player.name }} ({{ player.position }})</h4>
+                            <h5 class="card-title">#{{ player.jersey_number }}</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex p-0 border-0">Born: {{ player.dob }}</li>
+                                <li class="list-group-item d-flex p-0 border-0">Height: {{ player.height }}</li>
+                                <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li>
+                                <li class="list-group-item d-flex p-0 border-0">Batting Arm: {{ player.bats }}</li>
+                                <li class="list-group-item d-flex p-0 border-0">Throwing Arm: {{ player.throws }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<div class="row x-2">
+    {% for player in players %}
+        <div class="col-md-3">
+            <div class="card fixed-spacing fixed-width-card" style="width: 200px;">
+                <a href="{% url 'playerstats:player_by_year' player.id 2023 %}">
+                    {% if player.headshot  %}
+                        <img class="card-img-top" src="{{ player.headshot }}">
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">{{ player.name }} ({{ player.position }})</h4>
+                    <h5 class="card-title">#{{ player.jersey_number }}</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex p-0 border-0">Born: {{ player.dob }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Height: {{ player.height }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Weight: {{ player.weight }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Batting Arm: {{ player.bats }}</li>
+                        <li class="list-group-item d-flex p-0 border-0">Throwing Arm: {{ player.throws }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
