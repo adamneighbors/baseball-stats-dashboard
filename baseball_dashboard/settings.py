@@ -31,7 +31,7 @@ SECRET_KEY = config_file.get('DJANGO', 'SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [host for host in config_file.get('DJANGO', 'ALLOWED_HOSTS').split(',')]
 
 
 # Application definition
