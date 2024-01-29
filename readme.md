@@ -1,6 +1,12 @@
 # Baseball Statistics Dashboard
 
+<p alighn="center">
+    <img  src="preview.png" alt="drawing" width="750"/>
+</p>
+
 ## Introduction
+
+[Preview Here](https://baseball.adamneighbors.com)
 
 Just a small project to test display the usage of Django, Plotly, Postgresql and other technologies.
 
