@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load custom_filters %}
-
+{% block title %}{{ player.name }} - {{ year }}{% endblock %}
 {% block content %}
+    <title>Test</title>
     <div class="row">
         <div class="col-md-6 offset-md-2">
             <h2 class="mt-4 mb-4">{{ player.name }} ({{ player.position }}) - #{{ player.jersey_number }}</h2>
