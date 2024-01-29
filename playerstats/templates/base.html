@@ -14,12 +14,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <!-- Custom CSS for fixed spacing -->
+    <!-- Custom CSS for fixed spacing and sticky footer -->
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            flex: 1;
+        }
+
         .fixed-spacing {
             margin-right: 300px;
             margin-top: 15px;
             margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            margin-top: auto; /* Push the footer to the bottom */
         }
     </style>
 
@@ -43,6 +63,7 @@
     {% endblock %}
 </div>
 
+<!-- Footer -->
 <footer class="bg-body-tertiary text-center text-lg-start">
     <div class="bg-body-tertiary text-center p-3 navbar-dark bg-dark">
         <a class="text-light" target="_blank" href='https://github.com/adamneighbors/baseball-stats-dashboard'>
