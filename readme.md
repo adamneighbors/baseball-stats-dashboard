@@ -6,7 +6,7 @@
 
 ## Introduction
 
-[Preview Here](https://baseball.adamneighbors.com)
+<a target="_blank" href="https://baseball.adamneighbors.com">Preview Here</a>
 
 Just a small project to test display the usage of Django, Plotly, Postgresql and other technologies.
 
