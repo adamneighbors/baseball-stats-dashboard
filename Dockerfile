@@ -45,5 +45,4 @@ RUN set -x; \
 USER baseball
 WORKDIR $APP_ROOT
 
-
-ENTRYPOINT python ${APP_ROOT}/manage.py runserver
+ENTRYPOINT $VIRTUAL_ENV/bin/python ${APP_ROOT}/manage.py runserver 0.0.0.0:8000
