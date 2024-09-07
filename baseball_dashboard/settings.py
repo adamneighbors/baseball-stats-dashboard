@@ -29,7 +29,7 @@ API_HOST = config_file.get('API', 'API_HOST')
 SECRET_KEY = config_file.get('DJANGO', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [host for host in config_file.get('DJANGO', 'ALLOWED_HOSTS').split(',')]
 
