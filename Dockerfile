@@ -11,11 +11,11 @@ ENV APP_UID 1500
 
 # Install initial dependencies
 RUN set -x; \
-        apt-get update \
-        && apt-get install -y \
-            python3.12 \
-            python3.12-venv \
-            python3-pip
+    apt-get update \
+    && apt-get install -y \
+        python3.12 \
+        python3.12-venv \
+        python3-pip
 
 # Install additional packages
 
