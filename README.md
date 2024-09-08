@@ -38,6 +38,10 @@ There are **SEVERAL** improvements that could be made to this app. In it's curre
 
 - View Player Statistics and Charts
 
+<p alighn="center">
+    <img  src="player_preview.png" alt="drawing" width="750"/>
+</p>
+
 ## Requirements
 
 Requirements include Django, Plotly, and Pandas. See requirements.txt for full list.
