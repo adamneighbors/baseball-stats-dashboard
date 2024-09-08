@@ -1,0 +1,42 @@
+{
+    "cardsV2":[
+       {
+          "cardId":"baseball-card-id",
+          "card":{
+             "header":{
+                "title":"${JOB_NAME}",
+                "subtitle":"Build ${BUILD_ID}",
+                "imageUrl":"https://lh3.googleusercontent.com/-G2jDhzRAqMY/XfFoaexcPlI/AAAAAAAAEko/aLdcbAIxCbMfEq-H9mAJVpWOT0DxNiHuQCNcBGAsYHQ/s220-w220-h140-nd/jenkins-logo%2B220x140.png",
+                "imageType":"CIRCLE"
+             },
+             "sections":[
+                {
+                   "header":"${BUILD_STATUS}",
+                   "collapsible":true,
+                   "uncollapsibleWidgetsCount":1,
+                   "widgets":[
+                      {
+                         "textParagraph":{
+                            "text":"Click <a href=\"${BUILD_URL}\">here</a> for more info."
+                         }
+                      },
+                      {
+                         "divider":{}
+                      },
+                      {
+                         "decoratedText":{
+                            "icon":{
+                               "knownIcon":"PERSON"
+                            },
+                            "topLabel":"Last commit",
+                            "text":"<a href=\"GIT_URL_COMMIT\">GIT_LAST_COMMIT</a>",
+                            "bottomLabel":"Author: GIT_LAST_AUTHOR"
+                         }
+                      }
+                   ]
+                }
+             ]
+          }
+       }
+    ]
+ }
