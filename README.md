@@ -39,7 +39,7 @@ There are **SEVERAL** improvements that could be made to this app. In it's curre
 - View Player Statistics and Charts
 
 <p alighn="center">
-    <img  src="player_preview.png" alt="drawing" width="750"/>
+    <img  src="player_preview.png" alt="drawing" height="500"/>
 </p>
 
 ## Requirements
