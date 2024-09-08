@@ -27,7 +27,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'gitea-url', variable: 'REGISTRY'), string(credentialsId: 'baseball-owner', variable: 'OWNER')]) {
                         // Login to registry
                         docker.withRegistry("${REGISTRY}", "gitea-credentials") {
-                            def app = docker.build("${REGISTRY}/${APP_NAME}:${CONTAINER_TAG}", ".")
+                            def app = docker.build("${OWNER}${APP_NAME}:${CONTAINER_TAG}", ".")
                             app.push()
                         }
                     }
