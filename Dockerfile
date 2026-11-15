@@ -1,4 +1,5 @@
-FROM debian:stable
+# bookworm: python3.11; debian:stable (trixie) no longer ships 3.11
+FROM debian:bookworm-slim
 
 # Set Environment Variables
 ENV APP_ROOT /opt/baseball-dashboard
@@ -22,7 +23,7 @@ RUN apt update \
 ENV PYTHONDONTWRITEBYTECODE=1
 
 # Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1size
+ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8
 
 # Copy Current dir to container
