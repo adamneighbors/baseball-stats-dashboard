@@ -11,11 +11,11 @@ ENV APP_GID 1500
 ENV APP_UID 1500
 
 # Install initial dependencies
-RUN apt update \
-    && apt install -y \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
         python3.11 \
         python3.11-venv \
-        python3-pip
+    && rm -rf /var/lib/apt/lists/*
 
 # Install additional packages
 

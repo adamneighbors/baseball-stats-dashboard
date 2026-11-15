@@ -40,6 +40,8 @@ pipeline {
         DATABASE            = "${APP_NAME}-${FEATURE_NAME}"
         NTFY_TOPIC          = 'baseball-stats-ci'
         NTFY_BASE_URL       = 'http://host.docker.internal:2586'
+        // Public registry (gitea-url) goes through Cloudflare and rejects large layer uploads (413).
+        REGISTRY_PUSH       = 'http://127.0.0.1:3001'
     }
     agent any
     stages {
@@ -57,9 +59,8 @@ pipeline {
                     }
                 }
                 script {
-                    withCredentials([string(credentialsId: 'gitea-url', variable: 'REGISTRY'), string(credentialsId: 'baseball-owner', variable: 'OWNER')]) {
-                        // Login to registry
-                        docker.withRegistry("${REGISTRY}", "gitea-credentials") {
+                    withCredentials([string(credentialsId: 'baseball-owner', variable: 'OWNER')]) {
+                        docker.withRegistry("${REGISTRY_PUSH}", "gitea-credentials") {
                             def app = docker.build("${OWNER}/${APP_NAME}:${CONTAINER_TAG}", ".")
                             app.push()
                         }
