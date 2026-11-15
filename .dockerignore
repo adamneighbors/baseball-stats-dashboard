@@ -1,0 +1,10 @@
+.git
+.github
+.venv
+.vscode
+**/__pycache__
+**/*.pyc
+*.md
+preview.png
+player_preview.png
+LICENSE

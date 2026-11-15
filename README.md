@@ -6,7 +6,7 @@
 
 ## Introduction
 
-<!-- <a target="_blank" href="https://baseball.adamneighbors.com">Preview Here</a> -->
+### <a target="_blank" href="https://baseball.adamneighbors.com">Preview Here</a>
 
 Just a small project to test display the usage of Django, Plotly, Postgresql and other technologies.
 
@@ -37,6 +37,10 @@ There are **SEVERAL** improvements that could be made to this app. In it's curre
 ## Features
 
 - View Player Statistics and Charts
+
+<p alighn="center">
+    <img  src="player_preview.png" alt="drawing" height="500"/>
+</p>
 
 ## Requirements
 
