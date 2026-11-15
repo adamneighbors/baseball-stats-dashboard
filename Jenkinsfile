@@ -1,3 +1,34 @@
+// Build alerts via homelab ntfy (#50). Credential: ntfy-homelab-writer-token.
+// Topic ACL: /Docker/scripts/ntfy-topic-add.sh baseball-stats-ci
+def notifyNtfy = { String result, String durationMs = '' ->
+    withCredentials([string(credentialsId: 'ntfy-homelab-writer-token', variable: 'NTFY_TOKEN')]) {
+        sh """#!/usr/bin/env bash
+            set +e
+            docker run --rm \\
+              -v /Docker:/Docker:ro \\
+              -v "\${WORKSPACE}:/ws:ro" \\
+              --add-host host.docker.internal:host-gateway \\
+              -e BUILD_RESULT='${result}' \\
+              -e BUILD_DURATION_MS='${durationMs}' \\
+              -e DOCKER_ROOT=/ws \\
+              -e GITHUB_REPO=adamneighbors/baseball-stats-dashboard \\
+              -e JENKINS_GIT_SHA="\${GIT_COMMIT}" \\
+              -e NTFY_TOPIC="\${NTFY_TOPIC}" \\
+              -e NTFY_BASE_URL="\${NTFY_BASE_URL}" \\
+              -e NTFY_TOKEN="\${NTFY_TOKEN}" \\
+              -e NTFY_TAGS="jenkins,baseball-stats" \\
+              -e JOB_NAME="\${JOB_NAME}" \\
+              -e BUILD_NUMBER="\${BUILD_NUMBER}" \\
+              -e BUILD_URL="\${BUILD_URL}" \\
+              alpine:3.20 sh -ec 'command -v curl >/dev/null || apk add --no-cache curl bash git >/dev/null; bash /Docker/scripts/jenkins-notify-ntfy.sh'
+            ec=\$?
+            if [[ \$ec -ne 0 ]]; then
+              echo "WARN: ntfy notify failed (exit \$ec)" >&2
+            fi
+        """
+    }
+}
+
 pipeline {
     environment {
         FEATURE_NAME        = BRANCH_NAME.replaceAll('[\\(\\)_/]','-').toLowerCase()
@@ -7,6 +38,8 @@ pipeline {
         GIT_LAST_COMMIT     = sh(script: 'git log -1 --pretty=\'%B\'', returnStdout: true).trim()
         GIT_URL_COMMIT      = "${GIT_URL}/commit/${GIT_COMMIT}".replaceAll("baseball-stats-dashboard.git", "baseball-stats-dashboard")
         DATABASE            = "${APP_NAME}-${FEATURE_NAME}"
+        NTFY_TOPIC          = 'baseball-stats-ci'
+        NTFY_BASE_URL       = 'http://host.docker.internal:2586'
     }
     agent any
     stages {
@@ -35,14 +68,11 @@ pipeline {
             }
         }
     }
-    post{
-        always{
+    post {
+        always {
             script {
-                def cardConfig = readJSON file: 'google_chat_build_notification.json'
-
-                googlechatnotification url: 'id:286fa71f-78d5-4189-9480-b7a0146e9d4d',
-                messageFormat: 'card',
-                message: cardConfig.toString().replaceAll('GIT_LAST_AUTHOR', "${GIT_LAST_AUTHOR}").replaceAll('GIT_LAST_COMMIT', "${GIT_LAST_COMMIT}").replaceAll('GIT_URL_COMMIT', "${GIT_URL_COMMIT}")
+                def result = currentBuild.currentResult ?: 'UNKNOWN'
+                notifyNtfy(result, "${currentBuild.duration ?: ''}")
             }
             deleteDir()
         }
